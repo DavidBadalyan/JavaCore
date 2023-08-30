@@ -6,6 +6,7 @@ public class FigurePainter {
 //        //triangle 1 with 2D array
 //        String[][] triangle1= new String[5][];
 //        triangle1[0] = new String[1];
+
 //        triangle1[1] = new String[2];
 //        triangle1[2] = new String[3];
 //        triangle1[3] = new String[4];
@@ -21,7 +22,7 @@ public class FigurePainter {
 
         //triangle 1
         for (int i = 1; i <= 5; i++) {
-            for (int j = i; j >= 1 ; j--) {
+            for (int j = i; j >= 1; j--) {
                 System.out.print("* ");
             }
             System.out.println();
@@ -46,7 +47,7 @@ public class FigurePainter {
 
         //triangle 2
         for (int i = 5; i >= 1; i--) {
-            for (int j = i; j >= 1 ; j--) {
+            for (int j = i; j >= 1; j--) {
                 System.out.print("* ");
             }
             System.out.println();
