@@ -4,6 +4,7 @@ public class BraceChecker {
     Stack stack;
     String text;
 
+    //Overloading the constructor
     BraceChecker(String inputText) {
         this(inputText, 20);
     }
@@ -25,11 +26,11 @@ public class BraceChecker {
                 case ']':
                     char c1 = stack.pop();
                     if (c1 == 0) {
-                        System.out.println("Error: closed ] but not opened!");
+                        System.out.println("Error: closed ] but not opened at " + i);
                         return;
                     }
                     if (c1 != '[') {
-                        System.out.println("Error: opened " + c1 + " but closed ]");
+                        System.out.println("Error: opened " + c1 + " but closed ] at " + i);
                         return;
                     }
                     System.out.println("Cool! Opened [ and closed ]");
@@ -40,11 +41,11 @@ public class BraceChecker {
                 case '}':
                     char c2 = stack.pop();
                     if (c2 == 0) {
-                        System.out.println("Error: closed } but not opened!");
+                        System.out.println("Error: closed } but not opened at " + i);
                         return;
                     }
                     if (c2 != '{') {
-                        System.out.println("Error: opened " + c2 + " but closed }");
+                        System.out.println("Error: opened " + c2 + " but closed } at " + i);
                         return;
                     }
                     System.out.println("Cool! Opened { and closed }");
@@ -55,11 +56,11 @@ public class BraceChecker {
                 case ')':
                     char c3 = stack.pop();
                     if (c3 == 0) {
-                        System.out.println("Error: closed ) but not opened!");
+                        System.out.println("Error: closed ) but not opened at " + i);
                         return;
                     }
                     if (c3 != '(') {
-                        System.out.println("Error: opened " + c3 + " but closed )");
+                        System.out.println("Error: opened " + c3 + " but closed ) at " + i);
                         return;
                     }
                     System.out.println("Cool! Opened ( and closed )");
