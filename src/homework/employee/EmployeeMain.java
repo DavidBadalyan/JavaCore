@@ -14,6 +14,8 @@ public class EmployeeMain {
             System.out.println("Input 2 in order to PRINT ALL THE EMPLOYEES");
             System.out.println("Input 3 in order to SEARCH FOR AN EMPLOYEE WITH THE EMPLOYEE ID");
             System.out.println("Input 4 in order to SEARCH FOR AN EMPLOYEE WITH THE COMPANY NAME");
+            System.out.println("Input 5 in order to DELETE EMPLOYEE BY ID");
+            System.out.println("Input 6 in order to CHANGE EMPLOYEE INFO BY ID");
 
             String choice = scanner.nextLine();
             switch (choice) {
@@ -28,6 +30,10 @@ public class EmployeeMain {
                     String surname = scanner.nextLine();
                     System.out.print("Please enter the employee ID: ");
                     String employeeID = scanner.nextLine();
+                    if (employeeStorage.getByID(employeeID) != -1) {
+                        System.out.println("Error: There is already an employee with such an ID");
+                        continue;
+                    }
                     System.out.print("Please input the salary of the employee: ");
                     String salary = scanner.nextLine();
                     System.out.print("Please input the company that the employee works at: ");
@@ -57,6 +63,20 @@ public class EmployeeMain {
                     String keywordCompany = scanner.nextLine();
                     employeeStorage.searchByCompany(keywordCompany);
                     System.out.println("-----------------------------------");
+                case "5":
+                    System.out.println("-----------------------------------");
+                    System.out.print("Please input the ID of the employee you want to remove: ");
+                    String employeeIDInput = scanner.nextLine();
+                    employeeStorage.deleteByID(employeeIDInput);
+                    System.out.println("-----------------------------------");
+                    break;
+                case "6":
+                    System.out.println("-----------------------------------");
+                    System.out.print("Please input the ID of the employee you want to remove: ");
+                    String employeeIDChange = scanner.nextLine();
+                    employeeStorage.changeByID(employeeIDChange);
+                    System.out.println("-----------------------------------");
+                    break;
                 default:
                     System.out.println("There is no command like that!");
                     break;
