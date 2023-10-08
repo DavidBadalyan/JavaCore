@@ -47,7 +47,7 @@ public class EmployeeStorage {
     }
 
     public void deleteByID(String employeeID) {
-        int index = getByID(employeeID);
+        int index = getIndexByID(employeeID);
         if (index == -1) {
             System.out.println("There is no employee with an ID: " + employeeID);
             return;
@@ -61,7 +61,7 @@ public class EmployeeStorage {
     public void changeByID(String employeeID) {
         Scanner scanner = new Scanner(System.in);
 
-        int index = getByID(employeeID);
+        int index = getIndexByID(employeeID);
         if (index == -1) {
             System.out.println("There is no employee with an ID: " + employeeID);
             return;
@@ -90,7 +90,7 @@ public class EmployeeStorage {
         System.out.println("Employee changed!");
     }
 
-    public int getByID(String employeeID) {
+    public int getIndexByID(String employeeID) {
         for (int i = 0; i < size; i++) {
             if (employees[i].getEmployeeID().equals(employeeID)) {
                 return i;

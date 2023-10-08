@@ -30,7 +30,7 @@ public class EmployeeMain {
                     String surname = scanner.nextLine();
                     System.out.print("Please enter the employee ID: ");
                     String employeeID = scanner.nextLine();
-                    if (employeeStorage.getByID(employeeID) != -1) {
+                    if (employeeStorage.getIndexByID(employeeID) != -1) {
                         System.out.println("Error: There is already an employee with such an ID");
                         continue;
                     }
