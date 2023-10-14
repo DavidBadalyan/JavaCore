@@ -1,4 +1,4 @@
-package homework.dynamicarray;
+package homework.dynamicArray;
 
 public class DynArrTest {
     public static void main(String[] args) {

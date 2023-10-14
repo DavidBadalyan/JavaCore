@@ -1,6 +1,4 @@
-package homework.dynamicarray;
-
-import java.sql.SQLOutput;
+package homework.dynamicArray;
 
 public class DynArray {
         //սա մեր հիմնական մասիվն է, որտեղ պահելու ենք ավելացվող էլեմենտները

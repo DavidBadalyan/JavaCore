@@ -1,4 +1,4 @@
-package homework;
+package homework.forLoop;
 //homework 1
 
 public class FigurePainter {

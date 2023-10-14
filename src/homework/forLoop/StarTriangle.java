@@ -1,4 +1,4 @@
-package homework;
+package homework.forLoop;
 
 public class StarTriangle {
     public static void main(String[] args) {

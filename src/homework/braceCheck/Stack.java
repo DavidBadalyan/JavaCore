@@ -1,4 +1,4 @@
-package homework.bracecheck;
+package homework.braceCheck;
 
 public class Stack {
     private char[] stack;
