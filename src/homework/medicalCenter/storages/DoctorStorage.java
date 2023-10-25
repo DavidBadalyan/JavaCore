@@ -1,6 +1,8 @@
 package homework.medicalCenter.storages;
 
 
+import homework.medicalCenter.exceptions.DoctorByIDNotFoundException;
+import homework.medicalCenter.exceptions.DoctorIndexByIDNotFoundException;
 import homework.medicalCenter.objects.Doctor;
 
 import java.util.Scanner;
@@ -23,22 +25,22 @@ public class DoctorStorage {
         doctors = temp;
     }
 
-    public int getIndexByID(String doctorID) {
+    public int getIndexByID(String doctorID) throws DoctorIndexByIDNotFoundException{
         for (int i = 0; i < size; i++) {
             if (doctors[i].getId().equals(doctorID)) {
                 return i;
             }
         }
-        return -1;
+        throw new DoctorIndexByIDNotFoundException("Doctor Index By ID Not Found");
     }
 
-    public Doctor getByID(String doctorID) {
+    public Doctor getByID(String doctorID) throws DoctorByIDNotFoundException{
         for (int i = 0; i < size; i++) {
             if (doctors[i].getId().equals(doctorID)) {
                 return doctors[i];
             }
         }
-        return null;
+        throw new DoctorByIDNotFoundException("Doctor By ID Not Found");
     }
 
     public void searchDocByProfession(String givenProfession) {
@@ -50,9 +52,11 @@ public class DoctorStorage {
     }
 
     public void changeDocByID(String givenID) {
-        int index = getIndexByID(givenID);
-        if (index == -1) {
-            System.out.println("There is no doctor with an ID " + givenID);
+        int index;
+        try {
+            index = getIndexByID(givenID);
+        } catch (DoctorIndexByIDNotFoundException e) {
+            System.out.println("Doctor Index By ID Not Found");
             return;
         }
 
@@ -80,7 +84,14 @@ public class DoctorStorage {
     }
 
     public void deleteDocByID(String givenID) {
-        int index = getIndexByID(givenID);
+        int index;
+        try{
+            index = getIndexByID(givenID);
+        } catch (DoctorIndexByIDNotFoundException e) {
+            System.out.println("Doctor Index By ID Not Found");
+            return;
+        }
+
         for (int i = index; i < size - 1; i++) {
             doctors[i] = doctors[i + 1];
         }

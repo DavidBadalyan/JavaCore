@@ -1,10 +1,14 @@
 package homework.medicalCenter.demo;
 
+import homework.medicalCenter.DateUtil;
+import homework.medicalCenter.exceptions.DoctorByIDNotFoundException;
+import homework.medicalCenter.exceptions.PatientByIDNotFoundException;
 import homework.medicalCenter.objects.Doctor;
 import homework.medicalCenter.objects.Patient;
 import homework.medicalCenter.storages.DoctorStorage;
 import homework.medicalCenter.storages.PatientStorage;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -112,27 +116,45 @@ public class medicalCenterDemo {
         String surname = scanner.nextLine();
         System.out.print("Please input a ID for the patient: ");
         String id = scanner.nextLine();
-        if (patientStorage.getIndexByID(id) != -1) {
-            System.out.println("Error: There is already a patient with such an ID!");
-            return;
+        try{
+            patientStorage.getIndexByID(id);
+        } catch(PatientByIDNotFoundException e) {
+            System.out.println(e.getMessage());
         }
         System.out.print("Please input a phone number for the doctor: ");
         String phoneNumber = scanner.nextLine();
-        String regDate = sdf.format(date);
         System.out.println();
         System.out.println("Choose a doctor (enter the ID): ");
         doctorStorage.printDoctors();
         String givenID = scanner.nextLine();
-        Doctor doctor = doctorStorage.getByID(givenID);
-        if (doctor == null) {
-            System.out.println("Error: There is no doctor with such an ID!");
+        Doctor doctor;
+        try{
+            doctor = doctorStorage.getByID(givenID);
+        } catch (DoctorByIDNotFoundException e){
+            System.out.println("Doctor By ID Not Found");
             return;
         }
 
-        Patient patient = new Patient(id, name, surname, phoneNumber, doctor, regDate);
-        patientStorage.add(patient);
+        String appointmentDateStr;
+        Date appointmentDate;
 
-        System.out.println("Patient added!");
+        while(true) {
+            appointmentDateStr = scanner.nextLine();
+            try {
+                appointmentDate = DateUtil.stringToDateTime(appointmentDateStr);
+            } catch (ParseException exception) {
+                System.out.println("Wrong date format! It should be dd/MM/yy hh:mm!! Try again.");
+                continue;
+            }
+            break;
+        }
+
+        Patient patient = new Patient(id, name, surname, phoneNumber, doctor, new Date(), appointmentDate);
+        if (patientStorage.isDateValid(doctor, appointmentDate)) {
+            patientStorage.add(patient);
+            System.out.println("Patient added!");
+        }
+
         System.out.println("----------------------------------------------------------");
     }
 
