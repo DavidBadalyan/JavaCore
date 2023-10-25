@@ -2,6 +2,7 @@ package homework.medicalCenter.demo;
 
 import homework.medicalCenter.DateUtil;
 import homework.medicalCenter.exceptions.DoctorByIDNotFoundException;
+import homework.medicalCenter.exceptions.DoctorIndexByIDNotFoundException;
 import homework.medicalCenter.exceptions.PatientByIDNotFoundException;
 import homework.medicalCenter.objects.Doctor;
 import homework.medicalCenter.objects.Patient;
@@ -68,7 +69,9 @@ public class medicalCenterDemo {
         String surname = scanner.nextLine();
         System.out.print("Please input a ID for the doctor: ");
         String id = scanner.nextLine();
-        if (doctorStorage.getIndexByID(id) != -1) {
+        try {
+            doctorStorage.getIndexByID(id);
+        }catch(DoctorIndexByIDNotFoundException e) {
             System.out.println("Error: There is already a doctor with such an ID!");
             return;
         }
@@ -192,9 +195,11 @@ public class medicalCenterDemo {
         System.out.println("----------------------------------------------------------");
         System.out.print("Please enter the ID of the doctor you want to remove: ");
         String givenID = scanner.nextLine();
-        Doctor doctor = doctorStorage.getByID(givenID);
-        if (doctor == null) {
-            System.out.println("There is no doctor with such an ID");
+        Doctor doctor;
+        try{
+            doctor = doctorStorage.getByID(givenID);
+        } catch (DoctorByIDNotFoundException e){
+            System.out.println("Doctor By ID Not Found");
             return;
         }
         patientStorage.deleteAllPatientsByDoctor(doctor);
